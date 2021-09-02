@@ -18,7 +18,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.mesttra.mcs.orcamento.enums.TypeDestinationEnum;
+import br.com.mesttra.mcs.orcamento.enums.DestinationTypeEnum;
 import br.com.mesttra.mcs.orcamento.useful.Message;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -50,10 +50,10 @@ public class Destination {
 	@Column(name = "id", nullable = false)
 	private Long id;
 	
-	@Column(name = "typeDestination", nullable = false)
+	@Column(name = "destinationType", nullable = false)
 	@NotNull(message = Message.TYPE_DESTINATION_REQUIRED)
 	@Enumerated(EnumType.STRING)
-	private TypeDestinationEnum typeDestination;
+	private DestinationTypeEnum destinationType;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idBudget", nullable = false)

@@ -13,6 +13,8 @@ public class Message {
 	
 	public static final String SOURCE_REQUIRED = "O campo source do orçamento é obrigatório";
 	
+	public static final String DESTINATIONS_REQUIRED = "O campo destinations do orçamento é obrigatório";
+	
 	public static final String TYPE_DESTINATION_REQUIRED = "O campo typeDestinations do destino é obrigatório";
 	
 	public static final String BUDGET_REQUIRED = "O campo budget do destino é obrigatório";

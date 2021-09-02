@@ -64,7 +64,7 @@ public class Useful {
 	/**
 	 * Método que converte um tipo de page para outro tipo de page.
 	 * @param source
-	 * @param typeDestination
+	 * @param destinationType
 	 * @return Page<E>
 	 * @author Yallamy Nascimento (yallamy@gmail.com)
 	 * @since 2 de set de 2021

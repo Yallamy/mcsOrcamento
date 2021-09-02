@@ -15,7 +15,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum TypeDestinationEnum {
+public enum DestinationTypeEnum {
 	
 	HEALTH("HEALTH"),
 	EDUCATION("EDUCATION"),
@@ -23,19 +23,19 @@ public enum TypeDestinationEnum {
 	INFRASTRUCTURE("INFRASTRUCTURE"),
 	OTHERS("OTHERS");
 	
-	private String typeDestination;
+	private String destinationType;
 	
 	/**
 	 * Método que retorna o tipo de destinação de um orçamento
-	 * @param typeDestination
-	 * @return TypeDestinationEnum
+	 * @param destinationType
+	 * @return DestinationTypeEnum
 	 * @author Yallamy Nascimento (yallamy@gmail.com)
 	 * @since 2 de set de 2021
 	 */
-	public static TypeDestinationEnum getTypeDestination(String typeDestination) {
+	public static DestinationTypeEnum getTypeDestination(String destinationType) {
 		
 		return Arrays.asList(values()).stream().filter(
-				tr -> tr.typeDestination.equals(typeDestination)).findFirst().orElse(OTHERS);
+				tr -> tr.destinationType.equals(destinationType)).findFirst().orElse(OTHERS);
 	}
 
 }

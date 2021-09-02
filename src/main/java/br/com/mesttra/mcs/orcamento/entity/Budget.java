@@ -69,6 +69,7 @@ public class Budget {
 	private SourceEnum source;
 	
 	@OneToMany(mappedBy = "budget")
+	@NotNull(message = Message.DESTINATIONS_REQUIRED)
 	private List<Destination> destinations;
 	
 	@OneToMany(mappedBy = "budget")
