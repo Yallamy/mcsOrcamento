@@ -1,0 +1,39 @@
+server.error.whitelabel.enabled: true
+server.servlet.context-path: /microservices
+logging.level.org.springframework.web: TRACE
+server.error.include-stacktrace: NEVER
+
+server:
+    port: 8080
+    connection-timeout: 30000
+apiConfig:                                                     
+    request:
+        timeout: 30000
+    rest:
+        connectionTimeout: 10000
+        readTimeout: 10000
+    failsafe:
+        failureRateThreshold: 10
+        waitDurationInOpenState: 1000
+        slidingWindowSize: 2             
+        timeoutDuration: 5
+        
+logging:
+    file: budgetApi.log
+
+info:
+    app:
+        name: Budget API
+        description: Budget Microservice
+        version: 1
+        profile: desenvolvimento
+
+swagger:
+    title: Budget API
+    description: Budget Microservice
+    version: 1
+    termsOfServiceUrl:
+    contact:
+    license: Apache 2.0
+    licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html
+    protocol: http
