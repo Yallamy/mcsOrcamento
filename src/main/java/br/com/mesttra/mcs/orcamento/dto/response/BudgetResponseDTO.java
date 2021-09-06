@@ -9,6 +9,9 @@ import org.javamoney.moneta.Money;
 import br.com.mesttra.mcs.orcamento.entity.BudgetAllocation;
 import br.com.mesttra.mcs.orcamento.entity.Destination;
 import br.com.mesttra.mcs.orcamento.enums.SourceEnum;
+import br.com.mesttra.mcs.orcamento.useful.ConstantsSwagger;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,22 +26,30 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ApiModel(description = ConstantsSwagger.BUDGET_RESPONSE_DTO)
 public class BudgetResponseDTO implements Serializable {
 
 	private static final long serialVersionUID = 117364367715712019L; //TODO
 	
+	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_ID_DTO, position = 1)
 	private Long id;
 	
+	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_TOTAL_AMOUNT_DTO, position = 2)
 	private Money totalAmount;
 	
-	private Money spentAmount;
+	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_TOTAL_SPENT_AMOUNT_DTO, position = 3)
+	private Money totalSpentAmount;
 	
+	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_DT_DTO, position = 4)
 	private LocalDateTime dtBudget;
 
+	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_SOURCE_DTO, position = 5)
 	private SourceEnum source;
 
+	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_DESTINATIONS_DTO, position = 6)
 	private List<Destination> destinations;
 	
+	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_ALLOCATIONS_DTO, position = 7)
 	private List<BudgetAllocation> allocations;
 
 }

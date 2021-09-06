@@ -78,7 +78,12 @@ public class BudgetServiceImpl implements BudgetService {
 		ValidationCustom.validateConsistency(id, allocation);
 		
 		Budget budget = retrieve(id);
+		
+		//TODO - validar o valor financeiro
+		
 		allocation.setBudget(budget);
+		
+		
 		
 		budgetAllocationService.create(allocation);
 		

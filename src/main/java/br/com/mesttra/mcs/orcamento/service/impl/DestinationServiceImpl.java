@@ -33,6 +33,8 @@ public class DestinationServiceImpl implements DestinationService {
 		ValidationCustom.validateConsistency(destination);
 		ValidationCustom.validateDataViolation(destination, destination.getClass());
 		
+		//TODO - validar o destino
+		
 		return repository.save(destination);
 	}
 
