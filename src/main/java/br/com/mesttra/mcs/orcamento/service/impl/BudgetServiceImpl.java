@@ -1,5 +1,6 @@
 package br.com.mesttra.mcs.orcamento.service.impl;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -79,11 +80,13 @@ public class BudgetServiceImpl implements BudgetService {
 		
 		Budget budget = retrieve(id);
 		
-		//TODO - validar o valor financeiro
+		BigDecimal totalSpentAmount = budgetAllocationService.getTotalSpentAmount(budget);
+		
+		if(totalSpentAmount.add(allocation.getSpentAmount()).compareTo(budget.getTotalAmount()) == 1) {
+			throw new ApplicationException(ServiceEnumValidation.INSUFFICIENT_FUNDS);
+		}
 		
 		allocation.setBudget(budget);
-		
-		
 		
 		budgetAllocationService.create(allocation);
 		

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -106,6 +107,8 @@ public class BudgetServiceImplTest {
 				Mockito.any(Example.class), Mockito.any(Pageable.class))).thenReturn(this.page);
 		Mockito.when(this.destinationService.create(
 				Mockito.any(Destination.class))).thenReturn(this.responseDestination);
+		Mockito.when(this.budgetAllocationService.getTotalSpentAmount(
+				Mockito.any(Budget.class))).thenReturn(BigDecimal.ZERO);
 		Mockito.when(this.budgetAllocationService.create(
 				Mockito.any(BudgetAllocation.class))).thenReturn(this.responseAllocation);
 	}
@@ -185,6 +188,19 @@ public class BudgetServiceImplTest {
 		
 		assertThrows(ApplicationException.class, () -> {
 			this.service.createBudgetAllocation(response.getId(), null);
+		});
+	}
+	
+	@Test()
+	public void createAllocationFundosInsuficientesTest() {
+
+		this.response.setTotalAmount(BigDecimal.ONE);
+		
+		Mockito.when(this.budgetAllocationService.getTotalSpentAmount(
+				Mockito.any(Budget.class))).thenReturn(BigDecimal.ONE);
+		
+		assertThrows(ApplicationException.class, () -> {
+			this.service.createBudgetAllocation(response.getId(), this.requestAllocation);
 		});
 	}
 

@@ -1,5 +1,8 @@
 package br.com.mesttra.mcs.orcamento.service;
 
+import java.math.BigDecimal;
+
+import br.com.mesttra.mcs.orcamento.entity.Budget;
 import br.com.mesttra.mcs.orcamento.entity.BudgetAllocation;
 import br.com.mesttra.mcs.orcamento.exception.ApplicationException;
 
@@ -19,5 +22,15 @@ public interface BudgetAllocationService {
 	 * @since 2 de set de 2021
 	 */
 	public BudgetAllocation create(BudgetAllocation budgetAllocation) throws ApplicationException;
+	
+	/**
+	 * Método que recupera o valor total gasto em um orçamento
+	 * @param budget - orçamento
+	 * @return BigDecimal
+	 * @throws ApplicationException
+	 * @author Yallamy Nascimento (yallamy@gmail.com)
+	 * @since 6 de set de 2021
+	 */
+	public BigDecimal getTotalSpentAmount(Budget budget) throws ApplicationException;
 
 }

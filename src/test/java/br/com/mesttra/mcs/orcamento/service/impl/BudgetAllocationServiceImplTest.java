@@ -37,6 +37,8 @@ public class BudgetAllocationServiceImplTest {
 	
 	private BudgetAllocation response;
 	
+	private Budget requestBudget;
+	
 	@BeforeEach
 	public void setup() {
 		
@@ -57,9 +59,13 @@ public class BudgetAllocationServiceImplTest {
 				.dtAllocation(EntityGenericUtil.getDateTime())
 				.budget(budget)
 				.build();
+		
+		this.requestBudget = budget;
 
 		Mockito.when(this.repository.save(
 				Mockito.any(BudgetAllocation.class))).thenReturn(this.response);
+		Mockito.when(this.repository.findByBudget(
+				Mockito.any(Budget.class))).thenReturn(BigDecimal.ZERO);
 	}
 	
 	//create
@@ -98,6 +104,34 @@ public class BudgetAllocationServiceImplTest {
 		
 		assertThrows(ApplicationException.class, () -> {
 			this.service.create(request);
+		});
+	}
+	
+	//getTotalSpentAmount
+	@Test
+	public void getTest() {
+
+		BigDecimal response = this.service.getTotalSpentAmount(requestBudget);
+
+		assertNotNull(response);
+		assertEquals(BigDecimal.ZERO, response);
+	}
+
+	@Test()
+	public void getBudgetNullTest() {
+
+		assertThrows(ApplicationException.class, () -> {
+			this.service.getTotalSpentAmount(null);
+		});
+	}
+
+	@Test()
+	public void getBudgetIdNullTest() {
+
+		this.requestBudget.setId(null);
+
+		assertThrows(ApplicationException.class, () -> {
+			this.service.getTotalSpentAmount(requestBudget);
 		});
 	}
 }

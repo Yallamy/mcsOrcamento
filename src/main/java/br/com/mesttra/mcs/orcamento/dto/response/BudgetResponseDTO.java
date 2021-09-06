@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @ApiModel(description = ConstantsSwagger.BUDGET_RESPONSE_DTO)
 public class BudgetResponseDTO implements Serializable {
 
-	private static final long serialVersionUID = 117364367715712019L; //TODO
+	private static final long serialVersionUID = 117364367715712019L;
 	
 	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_ID_DTO, position = 1)
 	private Long id;
