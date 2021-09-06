@@ -37,14 +37,14 @@ public class DestinationRequestDTOTest {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		this.validator = factory.getValidator();
 		
-		this.request = DestinationRequestDTO.builder().destinationType(this.destinationType).build();
+		this.request = DestinationRequestDTO.builder().destinationType(this.destinationType.getDestinationType()).build();
 	}
 
 	@Test
 	public void getInstanceTest() {
 
 		assertNotNull(request);
-		assertEquals(this.destinationType, request.getDestinationType());
+		assertEquals(this.destinationType.getDestinationType(), request.getDestinationType());
 	}	
 	
 	@Test
@@ -71,16 +71,16 @@ public class DestinationRequestDTOTest {
 	public void setAndGetAllFieldsTest() {
 
 		request = DestinationRequestDTO.builder().build();
-		request.setDestinationType(this.destinationType);
+		request.setDestinationType(this.destinationType.getDestinationType());
 
-		assertEquals(this.destinationType, request.getDestinationType());
+		assertEquals(this.destinationType.getDestinationType(), request.getDestinationType());
 	}
 
 	@Test
 	public void getEqualsTest() {
 
 		DestinationRequestDTO request2 = 
-				DestinationRequestDTO.builder().destinationType(this.destinationType).build();
+				DestinationRequestDTO.builder().destinationType(this.destinationType.getDestinationType()).build();
 
 		assertNotNull(request);
 		assertNotNull(request2);
@@ -91,7 +91,7 @@ public class DestinationRequestDTOTest {
 	public void getHashCodeTest() {
 
 		DestinationRequestDTO request2 = 
-				DestinationRequestDTO.builder().destinationType(this.destinationType).build();
+				DestinationRequestDTO.builder().destinationType(this.destinationType.getDestinationType()).build();
 
 		assertNotNull(request);
 		assertNotNull(request2);

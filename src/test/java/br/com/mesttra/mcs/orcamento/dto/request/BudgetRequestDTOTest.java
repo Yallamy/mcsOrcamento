@@ -45,7 +45,7 @@ public class BudgetRequestDTOTest {
 		this.source = SourceEnum.FEDERAL;
 		this.destinations = new LinkedList<DestinationRequestDTO>();
 		this.destinations.add(DestinationRequestDTO
-				.builder().destinationType(DestinationTypeEnum.EDUCATION).build());     
+				.builder().destinationType(DestinationTypeEnum.EDUCATION.getDestinationType()).build());     
 		
 
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -54,7 +54,7 @@ public class BudgetRequestDTOTest {
 		this.request = BudgetRequestDTO
 				.builder()
 				.totalAmount(totalAmount)
-				.source(source)
+				.source(source.getSource())
 				.destinations(destinations)
 				.build();
 	}
@@ -64,7 +64,7 @@ public class BudgetRequestDTOTest {
 
 		assertNotNull(request);
 		assertEquals(this.totalAmount, request.getTotalAmount());
-		assertEquals(this.source, request.getSource());
+		assertEquals(this.source.getSource(), request.getSource());
 		assertEquals(this.destinations, request.getDestinations());
 	}	
 	
@@ -117,11 +117,11 @@ public class BudgetRequestDTOTest {
 
 		request = BudgetRequestDTO.builder().build();
 		request.setTotalAmount(this.totalAmount);
-		request.setSource(this.source);
+		request.setSource(this.source.getSource());
 		request.setDestinations(this.destinations);
 
 		assertEquals(this.totalAmount, request.getTotalAmount());
-		assertEquals(this.source, request.getSource());
+		assertEquals(this.source.getSource(), request.getSource());
 		assertEquals(this.destinations, request.getDestinations());
 	}
 
@@ -132,7 +132,7 @@ public class BudgetRequestDTOTest {
 				BudgetRequestDTO
 				.builder()
 				.totalAmount(totalAmount)
-				.source(source)
+				.source(source.getSource())
 				.destinations(destinations)
 				.build();
 
@@ -148,7 +148,7 @@ public class BudgetRequestDTOTest {
 				BudgetRequestDTO
 				.builder()
 				.totalAmount(totalAmount)
-				.source(source)
+				.source(source.getSource())
 				.destinations(destinations)
 				.build();
 

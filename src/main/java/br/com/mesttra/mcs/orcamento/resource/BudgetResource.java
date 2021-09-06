@@ -1,5 +1,6 @@
 package br.com.mesttra.mcs.orcamento.resource;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.mesttra.mcs.orcamento.dto.request.AllocationRequestDTO;
 import br.com.mesttra.mcs.orcamento.dto.request.BudgetRequestDTO;
+import br.com.mesttra.mcs.orcamento.dto.response.AllocationResponseDTO;
 import br.com.mesttra.mcs.orcamento.dto.response.BudgetResponseDTO;
 import br.com.mesttra.mcs.orcamento.entity.Budget;
 import br.com.mesttra.mcs.orcamento.entity.BudgetAllocation;
@@ -68,9 +70,12 @@ public class BudgetResource {
 			@Valid @RequestBody BudgetRequestDTO request) throws ApplicationException {
 
 		Budget budget = Useful.convert(request, Budget.class);
+		budget.setSource(SourceEnum.getEnum(request.getSource()));
 
 		budget = this.service.create(budget);
 		BudgetResponseDTO response = Useful.convert(budget, BudgetResponseDTO.class);
+		response.setTotalSpentAmount(BigDecimal.ZERO);
+		response.setAllocations(new LinkedList<AllocationResponseDTO>());
 
 		return new ResponseEntity<BudgetResponseDTO>(response, HttpStatus.OK);
 	}
@@ -96,6 +101,7 @@ public class BudgetResource {
 		Budget budget = this.service.createBudgetAllocation(id, allocation);
 		
 		BudgetResponseDTO response = Useful.convert(budget, BudgetResponseDTO.class);
+		response.setTotalSpentAmount(this.service.getTotalSpentAmount(budget));
 
 		return new ResponseEntity<BudgetResponseDTO>(response, HttpStatus.OK);
 	}
@@ -116,6 +122,7 @@ public class BudgetResource {
 
 		Budget budget = this.service.retrieve(id);
 		BudgetResponseDTO response = Useful.convert(budget, BudgetResponseDTO.class);
+		response.setTotalSpentAmount(this.service.getTotalSpentAmount(budget));
 
 		return new ResponseEntity<BudgetResponseDTO>(response, HttpStatus.OK);
 	}
@@ -165,6 +172,15 @@ public class BudgetResource {
 		
 		Page<Budget> page = this.service.list(budget, pageable);
 		Page<BudgetResponseDTO> response = Useful.convertToPage(page, BudgetResponseDTO.class);
+		
+		for (BudgetResponseDTO budgetResponseDTO : response) {
+			budgetResponseDTO.setTotalSpentAmount(this.service.getTotalSpentAmount(
+					Budget
+					.builder()
+					.id(budgetResponseDTO.getId())
+					.build()
+					));
+		}
 
 		return ResponseEntity.ok(response);
 	}

@@ -2,7 +2,7 @@ package br.com.mesttra.mcs.orcamento.service.impl;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
@@ -34,9 +34,8 @@ public class BudgetAllocationServiceImpl implements BudgetAllocationService {
 	public BudgetAllocation create(BudgetAllocation budgetAllocation) throws ApplicationException {
 		
 		ValidationCustom.validateConsistency(budgetAllocation);
-		ValidationCustom.validateDataViolation(budgetAllocation, budgetAllocation.getClass());
-		
 		budgetAllocation.setDtAllocation(LocalDateTime.now());
+		ValidationCustom.validateDataViolation(budgetAllocation, budgetAllocation.getClass());
 		
 		return repository.save(budgetAllocation);
 	}
@@ -54,7 +53,11 @@ public class BudgetAllocationServiceImpl implements BudgetAllocationService {
 		
 		BigDecimal totalSpentAmount = repository.findByBudget(budget);
 		
-		return Optional.of(totalSpentAmount).orElse(BigDecimal.ZERO);
+		if(Objects.isNull(totalSpentAmount)) {
+			totalSpentAmount = BigDecimal.ZERO;
+		}
+		
+		return totalSpentAmount;
 	}
 
 }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-import br.com.mesttra.mcs.orcamento.enums.DestinationTypeEnum;
 import br.com.mesttra.mcs.orcamento.useful.ConstantsSwagger;
 import br.com.mesttra.mcs.orcamento.useful.Message;
 import io.swagger.annotations.ApiModel;
@@ -30,6 +29,6 @@ public class DestinationRequestDTO implements Serializable {
 	
 	@ApiModelProperty(value = ConstantsSwagger.DESTINATION_REQUEST_TYPE_DTO, position = 1)
 	@NotNull(message = Message.TYPE_DESTINATION_REQUIRED)
-	private DestinationTypeEnum destinationType;
+	private String destinationType;
 
 }

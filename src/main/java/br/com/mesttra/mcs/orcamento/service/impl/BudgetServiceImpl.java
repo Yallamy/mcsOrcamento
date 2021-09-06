@@ -111,6 +111,18 @@ public class BudgetServiceImpl implements BudgetService {
 			throw new ApplicationException(ServiceEnumValidation.BUDGET_NOT_FOUND);
 		}
 	}
+	
+	/*
+	 * 
+	 * (non-Javadoc)
+	 * @see br.com.mesttra.mcs.orcamento.service.BudgetService#getTotalSpentAmount(br.com.mesttra.mcs.orcamento.entity.Budget)
+	 */
+	@Override
+	public BigDecimal getTotalSpentAmount(Budget budget) throws ApplicationException {
+		
+		ValidationCustom.validateConsistency(budget);
+		return budgetAllocationService.getTotalSpentAmount(budget);
+	}
 
 	/*
 	 * 

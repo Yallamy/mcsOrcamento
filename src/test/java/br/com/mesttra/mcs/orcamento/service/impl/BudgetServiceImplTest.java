@@ -165,6 +165,12 @@ public class BudgetServiceImplTest {
 	//create allocation
 	@Test
 	public void createAllocationTest() {
+		
+		this.response.setTotalAmount(BigDecimal.TEN);
+		this.requestAllocation.setSpentAmount(BigDecimal.ONE);
+		
+		Mockito.when(this.budgetAllocationService.getTotalSpentAmount(
+				Mockito.any(Budget.class))).thenReturn(BigDecimal.ONE);
 
 		Budget response = this.service.createBudgetAllocation(this.response.getId(), this.requestAllocation);
 

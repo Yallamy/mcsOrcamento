@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import br.com.mesttra.mcs.orcamento.enums.SourceEnum;
 import br.com.mesttra.mcs.orcamento.useful.ConstantsSwagger;
 import br.com.mesttra.mcs.orcamento.useful.Message;
 import io.swagger.annotations.ApiModel;
@@ -37,7 +36,7 @@ public class BudgetRequestDTO implements Serializable {
 	
 	@ApiModelProperty(value = ConstantsSwagger.BUDGET_REQUEST_SOURCE_DTO, position = 2)
 	@NotNull(message = Message.SOURCE_REQUIRED)
-	private SourceEnum source;
+	private String source;
 	
 	@ApiModelProperty(value = ConstantsSwagger.BUDGET_REQUEST_DESTINATIONS_DTO, position = 3)
 	@NotNull(message = Message.DESTINATIONS_REQUIRED)
