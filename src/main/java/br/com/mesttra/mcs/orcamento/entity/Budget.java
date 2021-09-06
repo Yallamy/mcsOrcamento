@@ -1,5 +1,6 @@
 package br.com.mesttra.mcs.orcamento.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,12 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.javamoney.moneta.Money;
 
 import com.google.gson.annotations.Expose;
 
@@ -55,8 +54,8 @@ public class Budget {
 	private Long id;
 	
 	@Column(name = "totalAmount", nullable = false)
-	@NotEmpty(message = Message.TOTAL_AMOUNT_REQUIRED)
-	private Money totalAmount;
+	@NotNull(message = Message.TOTAL_AMOUNT_REQUIRED)
+	private BigDecimal totalAmount;
 	
 	@Column(name = "dtBudget", nullable = false)
 	@NotNull(message = Message.DT_BUDGET_REQUIRED)

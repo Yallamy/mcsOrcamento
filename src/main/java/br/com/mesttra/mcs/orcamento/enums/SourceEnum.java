@@ -30,7 +30,7 @@ public enum SourceEnum {
 	 * @author Yallamy Nascimento (yallamy@gmail.com)
 	 * @since 2 de set de 2021
 	 */
-	public static SourceEnum getSource(String source) {
+	public static SourceEnum getEnum(String source) {
 		
 		return Arrays.asList(values()).stream().filter(
 				tr -> tr.source.equals(source)).findFirst().orElse(null);

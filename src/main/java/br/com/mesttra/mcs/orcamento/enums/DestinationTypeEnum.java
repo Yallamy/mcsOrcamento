@@ -32,7 +32,7 @@ public enum DestinationTypeEnum {
 	 * @author Yallamy Nascimento (yallamy@gmail.com)
 	 * @since 2 de set de 2021
 	 */
-	public static DestinationTypeEnum getTypeDestination(String destinationType) {
+	public static DestinationTypeEnum getEnum(String destinationType) {
 		
 		return Arrays.asList(values()).stream().filter(
 				tr -> tr.destinationType.equals(destinationType)).findFirst().orElse(OTHERS);

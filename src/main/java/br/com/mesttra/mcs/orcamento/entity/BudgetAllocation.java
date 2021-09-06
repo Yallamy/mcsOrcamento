@@ -1,5 +1,6 @@
 package br.com.mesttra.mcs.orcamento.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -11,15 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.javamoney.moneta.Money;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.gson.annotations.Expose;
 
 import br.com.mesttra.mcs.orcamento.useful.Message;
 import lombok.AccessLevel;
@@ -53,12 +51,11 @@ public class BudgetAllocation {
 	private Long id;
 	
 	@Column(name = "spentAmount", nullable = false)
-	@NotEmpty(message = Message.SPENT_AMOUNT_REQUIRED)
-	private Money spentAmount;
+	@NotNull(message = Message.SPENT_AMOUNT_REQUIRED)
+	private BigDecimal spentAmount;
 	
 	@Column(name = "dtAllocation", nullable = false)
 	@NotNull(message = Message.DT_BUDGET_REQUIRED)
-	@Expose
 	private LocalDateTime dtAllocation;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

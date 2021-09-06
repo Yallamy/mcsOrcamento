@@ -1,13 +1,10 @@
 package br.com.mesttra.mcs.orcamento.dto.response;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.javamoney.moneta.Money;
-
-import br.com.mesttra.mcs.orcamento.entity.BudgetAllocation;
-import br.com.mesttra.mcs.orcamento.entity.Destination;
 import br.com.mesttra.mcs.orcamento.enums.SourceEnum;
 import br.com.mesttra.mcs.orcamento.useful.ConstantsSwagger;
 import io.swagger.annotations.ApiModel;
@@ -35,10 +32,10 @@ public class BudgetResponseDTO implements Serializable {
 	private Long id;
 	
 	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_TOTAL_AMOUNT_DTO, position = 2)
-	private Money totalAmount;
+	private BigDecimal totalAmount;
 	
 	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_TOTAL_SPENT_AMOUNT_DTO, position = 3)
-	private Money totalSpentAmount;
+	private BigDecimal totalSpentAmount;
 	
 	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_DT_DTO, position = 4)
 	private LocalDateTime dtBudget;
@@ -47,9 +44,9 @@ public class BudgetResponseDTO implements Serializable {
 	private SourceEnum source;
 
 	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_DESTINATIONS_DTO, position = 6)
-	private List<Destination> destinations;
+	private List<DestinationResponseDTO> destinations;
 	
 	@ApiModelProperty(value = ConstantsSwagger.BUDGET_RESPONSE_ALLOCATIONS_DTO, position = 7)
-	private List<BudgetAllocation> allocations;
+	private List<AllocationResponseDTO> allocations;
 
 }

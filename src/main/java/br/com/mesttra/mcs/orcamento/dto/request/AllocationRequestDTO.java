@@ -1,10 +1,9 @@
 package br.com.mesttra.mcs.orcamento.dto.request;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.validation.constraints.NotNull;
-
-import org.javamoney.moneta.Money;
 
 import br.com.mesttra.mcs.orcamento.useful.ConstantsSwagger;
 import br.com.mesttra.mcs.orcamento.useful.Message;
@@ -31,6 +30,6 @@ public class AllocationRequestDTO implements Serializable {
 	
 	@ApiModelProperty(value = ConstantsSwagger.ALLOCATION_REQUEST_SPENT_AMOUNT_DTO, position = 1)
 	@NotNull(message = Message.SPENT_AMOUNT_REQUIRED)
-	private Money spentAmount;
+	private BigDecimal spentAmount;
 
 }

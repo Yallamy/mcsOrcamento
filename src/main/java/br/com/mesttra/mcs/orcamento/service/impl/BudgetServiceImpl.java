@@ -50,9 +50,9 @@ public class BudgetServiceImpl implements BudgetService {
 	public Budget create(Budget budget) throws ApplicationException {
 		
 		ValidationCustom.validateConsistency(budget);
+		budget.setDtBudget(LocalDateTime.now());
 		ValidationCustom.validateDataViolation(budget, budget.getClass());
 		
-		budget.setDtBudget(LocalDateTime.now());
 		Budget newBudget = repository.save(budget);
 		
 		List<Destination> destinationList = new LinkedList<Destination>();

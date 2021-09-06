@@ -1,9 +1,8 @@
 package br.com.mesttra.mcs.orcamento.dto.response;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
-import org.javamoney.moneta.Money;
 
 import br.com.mesttra.mcs.orcamento.useful.ConstantsSwagger;
 import io.swagger.annotations.ApiModel;
@@ -31,7 +30,7 @@ public class AllocationResponseDTO implements Serializable {
 	private Long id;
 	
 	@ApiModelProperty(value = ConstantsSwagger.ALLOCATION_RESPONSE_SPENT_AMOUNT_DTO, position = 2)
-	private Money spentAmount;
+	private BigDecimal spentAmount;
 	
 	@ApiModelProperty(value = ConstantsSwagger.ALLOCATION_RESPONSE_DT_DTO, position = 3)
 	private LocalDateTime dtAllocation;

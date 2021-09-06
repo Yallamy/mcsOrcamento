@@ -1,6 +1,9 @@
 package br.com.mesttra.mcs.orcamento.resource;
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -25,6 +28,9 @@ import br.com.mesttra.mcs.orcamento.dto.request.BudgetRequestDTO;
 import br.com.mesttra.mcs.orcamento.dto.response.BudgetResponseDTO;
 import br.com.mesttra.mcs.orcamento.entity.Budget;
 import br.com.mesttra.mcs.orcamento.entity.BudgetAllocation;
+import br.com.mesttra.mcs.orcamento.entity.Destination;
+import br.com.mesttra.mcs.orcamento.enums.DestinationTypeEnum;
+import br.com.mesttra.mcs.orcamento.enums.SourceEnum;
 import br.com.mesttra.mcs.orcamento.exception.ApplicationException;
 import br.com.mesttra.mcs.orcamento.service.BudgetService;
 import br.com.mesttra.mcs.orcamento.useful.ConstantsPath;
@@ -133,10 +139,28 @@ public class BudgetResource {
 			@RequestParam("source") Optional<String> source,
 			@RequestParam("destination") Optional<String> destination) throws ApplicationException {
 
-		//TODO
+		
+		List<Destination> destinations = null;
+		DestinationTypeEnum tipoDestino = DestinationTypeEnum.getEnum(destination.orElse(null));
+		
+		if(Objects.nonNull(tipoDestino)) {
+			
+			destinations = new LinkedList<Destination>();
+			Destination destino = 
+					Destination
+					.builder()
+					.destinationType(tipoDestino)
+					.build();
+			
+			destinations.add(destino);
+		}
+		
 		Budget budget = 
 				Budget
 				.builder()
+				.dtBudget(dtBudget.orElse(null))
+				.source(SourceEnum.getEnum(source.orElse(null)))
+				.destinations(destinations)
 				.build();
 		
 		Page<Budget> page = this.service.list(budget, pageable);
