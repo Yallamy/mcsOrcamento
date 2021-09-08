@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "1df3f9d1-153b-4bfc-9562-217d85009284",
+		"name": "Budget service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Budget",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"totalAmount\": 100,\r\n  \"source\": \"FEDERAL\",\r\n  \"destinations\": [\r\n    {\r\n      \"destinationType\": \"EDUCATION\"\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/microservices/api/v1/mesttra/budget/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"microservices",
+						"api",
+						"v1",
+						"mesttra",
+						"budget",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Allocation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"spentAmount\": 50\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/microservices/api/v1/mesttra/budget/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"microservices",
+						"api",
+						"v1",
+						"mesttra",
+						"budget",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Budget",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "List Budget",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
