@@ -116,6 +116,18 @@ public class BudgetAllocationServiceImplTest {
 		assertNotNull(response);
 		assertEquals(BigDecimal.ZERO, response);
 	}
+	
+	@Test()
+	public void getTotalSpentAmountNullTest() {
+		
+		Mockito.when(this.repository.findByBudget(
+				Mockito.any(Budget.class))).thenReturn(null);
+
+		BigDecimal response = this.service.getTotalSpentAmount(requestBudget);
+
+		assertNotNull(response);
+		assertEquals(BigDecimal.ZERO, response);
+	}
 
 	@Test()
 	public void getBudgetNullTest() {

@@ -111,6 +111,8 @@ public class BudgetServiceImplTest {
 				Mockito.any(Budget.class))).thenReturn(BigDecimal.ZERO);
 		Mockito.when(this.budgetAllocationService.create(
 				Mockito.any(BudgetAllocation.class))).thenReturn(this.responseAllocation);
+		Mockito.when(this.budgetAllocationService.getTotalSpentAmount(
+				Mockito.any(Budget.class))).thenReturn(BigDecimal.ZERO);
 	}
 	
 	//create
@@ -239,6 +241,24 @@ public class BudgetServiceImplTest {
 
 		assertThrows(ApplicationException.class, () -> {
 			this.service.retrieve(id);
+		});
+	}
+	
+	//getTotalSpentAmount
+	@Test
+	public void getTotalSpentAmountTest() {
+
+		BigDecimal response = this.service.getTotalSpentAmount(this.request);
+
+		assertNotNull(response);
+		assertEquals(BigDecimal.ZERO, response);
+	}
+	
+	@Test
+	public void getTotalSpentAmountNullTest() {
+		
+		assertThrows(ApplicationException.class, () -> {
+			this.service.getTotalSpentAmount(null);
 		});
 	}
 	
