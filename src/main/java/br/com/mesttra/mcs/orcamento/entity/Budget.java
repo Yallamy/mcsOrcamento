@@ -18,8 +18,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.google.gson.annotations.Expose;
-
 import br.com.mesttra.mcs.orcamento.enums.SourceEnum;
 import br.com.mesttra.mcs.orcamento.useful.Message;
 import lombok.AccessLevel;
@@ -50,7 +48,6 @@ public class Budget {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq_budget")
 	@Column(name = "id", nullable = false)
-	@Expose
 	private Long id;
 	
 	@Column(name = "totalAmount", nullable = false)
@@ -59,7 +56,6 @@ public class Budget {
 	
 	@Column(name = "dtBudget", nullable = false)
 	@NotNull(message = Message.DT_BUDGET_REQUIRED)
-	@Expose
 	private LocalDateTime dtBudget;
 	
 	@Column(name = "source", nullable = false)
