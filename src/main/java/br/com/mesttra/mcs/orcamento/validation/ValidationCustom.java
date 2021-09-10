@@ -6,12 +6,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
 
+import br.com.mesttra.mcs.orcamento.exception.ApplicationException;
 import br.com.mesttra.mcs.orcamento.exception.ServiceEnumValidation;
 import br.com.mesttra.mcs.orcamento.useful.Useful;
-import br.com.mesttra.mcs.orcamento.exception.ApplicationException;
+import br.com.mesttra.mcs.orcamento.useful.ValidatorProducer;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -21,8 +20,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class ValidationCustom {
-	
-	private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 	
 	/**
 	 * Método que valida o modelo de dados
@@ -38,7 +35,7 @@ public class ValidationCustom {
 		
 		E sourceConv = Useful.convert(source, destinationType);
 		
-		Set<ConstraintViolation<E>> violations = validator.validate(sourceConv);
+		Set<ConstraintViolation<E>> violations = ValidatorProducer.getValidator().validate(sourceConv);
 
 		if(violations.size() > BigDecimal.ZERO.intValue()) {
 			

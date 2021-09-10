@@ -4,8 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
@@ -30,10 +28,7 @@ public class Useful {
         
         if (Objects.nonNull(source) && Objects.nonNull(destinationType)) {
 
-             ModelMapper modelMapper = new ModelMapper();
-
-             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-             model = modelMapper.map(source, destinationType);
+        	 model = ModelMapperProducer.getMapper().map(source, destinationType);
         }
 
         return model;
