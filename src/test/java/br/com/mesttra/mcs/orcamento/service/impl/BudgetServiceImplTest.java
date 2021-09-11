@@ -276,7 +276,7 @@ public class BudgetServiceImplTest {
 	}
 
 	@Test
-	public void listComInteressadoNullTest() {
+	public void listComBudgetNullTest() {
 
 		Page<Budget> response = this.service.list(null, pageable);
 
