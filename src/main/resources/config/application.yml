@@ -4,7 +4,7 @@ logging.level.org.springframework.web: TRACE
 server.error.include-stacktrace: NEVER
 
 server:
-    port: 8080
+    port: 8081
     connection-timeout: 30000
 apiConfig:                                                     
     request:

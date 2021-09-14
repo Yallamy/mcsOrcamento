@@ -67,6 +67,22 @@ public class ValidationCustom {
 	}
 	
 	/**
+	 * Método que valida se um objeto está null e se sim, lança uma exceção especifica
+	 * @param <T>
+	 * @param source - objeto
+	 * @param ex - exceção
+	 * @throws ApplicationException
+	 * @author Yallamy Nascimento (yallamy@gmail.com)
+	 * @since 14 de set de 2021
+	 */
+	public static <T> void validateNull(T source, ServiceEnumValidation ex) throws ApplicationException {
+
+		if(Objects.isNull(source)) {
+			throw new ApplicationException(ex);
+		}
+	}
+	
+	/**
 	 * Método que realiza a validação regex
 	 * @param regex - regex
 	 * @param data - dado a ser validado
