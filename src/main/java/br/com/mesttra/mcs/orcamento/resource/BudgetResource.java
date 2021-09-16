@@ -1,7 +1,6 @@
 package br.com.mesttra.mcs.orcamento.resource;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -70,7 +69,7 @@ public class BudgetResource {
 			@Valid @RequestBody BudgetRequestDTO request) throws ApplicationException {
 
 		Budget budget = Useful.convert(request, Budget.class);
-		budget.setSource(SourceEnum.getEnum(request.getSource()));
+		budget.setSource(SourceEnum.getEnum(request.getSource().toUpperCase()));
 
 		budget = this.service.create(budget);
 		BudgetResponseDTO response = Useful.convert(budget, BudgetResponseDTO.class);
@@ -129,7 +128,6 @@ public class BudgetResource {
 
 	/**
 	 * Método REST que lista os orçamentos de acordo com os filtros informados.
-	 * @param dtBudget - filtro dtBudget do orçamento
 	 * @param source - filtro source do orçamento
 	 * @param destination - filtro destination do orçamento
 	 * @return ResponseEntity<?> - lista de orçamentos ou código de erro HTTP
@@ -142,11 +140,9 @@ public class BudgetResource {
 		notes = ConstantsSwagger.LIST_BUDGET_NOTES, response = BudgetResponseDTO.class)
 	public @ResponseBody ResponseEntity<Page<?>> list(
 			@PageableDefault(value = 30, sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable,
-			@RequestParam("dtBudget") Optional<LocalDateTime> dtBudget,
 			@RequestParam("source") Optional<String> source,
 			@RequestParam("destination") Optional<String> destination) throws ApplicationException {
 
-		
 		List<Destination> destinations = null;
 		DestinationTypeEnum tipoDestino = DestinationTypeEnum.getEnum(destination.orElse(null));
 		
@@ -165,7 +161,6 @@ public class BudgetResource {
 		Budget budget = 
 				Budget
 				.builder()
-				.dtBudget(dtBudget.orElse(null))
 				.source(SourceEnum.getEnum(source.orElse(null)))
 				.destinations(destinations)
 				.build();
