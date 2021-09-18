@@ -12,15 +12,20 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"totalAmount\": 100,\r\n  \"source\": \"FEDERAL\",\r\n  \"destinations\": [\r\n    {\r\n      \"destinationType\": \"EDUCATION\"\r\n    }\r\n  ]\r\n}"
+					"raw": "{\r\n  \"totalAmount\": 100,\r\n  \"source\": \"FEDERAL\",\r\n  \"destinations\": [\r\n    {\r\n      \"destinationType\": \"EDUCATION\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/microservices/api/v1/mesttra/budget/",
+					"raw": "http://localhost:8081/microservices/api/v1/mesttra/budget/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"microservices",
 						"api",
@@ -40,15 +45,20 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"spentAmount\": 50\r\n}"
+					"raw": "{\r\n  \"spentAmount\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/microservices/api/v1/mesttra/budget/1",
+					"raw": "http://localhost:8081/microservices/api/v1/mesttra/budget/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"microservices",
 						"api",
