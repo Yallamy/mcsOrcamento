@@ -6,10 +6,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.mesttra.mcs.orcamento.entity.Budget;
 import br.com.mesttra.mcs.orcamento.entity.BudgetAllocation;
 import br.com.mesttra.mcs.orcamento.entity.Destination;
+import br.com.mesttra.mcs.orcamento.enums.DestinationTypeEnum;
 import br.com.mesttra.mcs.orcamento.exception.ApplicationException;
 import br.com.mesttra.mcs.orcamento.exception.ServiceEnumValidation;
 import br.com.mesttra.mcs.orcamento.repository.BudgetRepository;
@@ -140,8 +144,44 @@ public class BudgetServiceImpl implements BudgetService {
 
 		ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
 		Example<Budget> example = Example.of(budget, matcher);
+		
+		Page<Budget> page = repository.findAll(example, pageable); 
+		
+		if(Objects.nonNull(budget.getDestinations())) {
+			page = filtroPorDestino(page, budget.getDestinations().get(0).getDestinationType());
+		}
 
-		return repository.findAll(example, pageable); 
+		return page; 
+	}
+	
+	/**
+	 * Método que filtra por destino
+	 * @param page - página de origem
+	 * @param filtro - DestinationTypeEnum
+	 * @return Page<Budget>
+	 * @author Yallamy Nascimento (yallamy@gmail.com)
+	 * @since 20 de set de 2021
+	 */
+	private Page<Budget> filtroPorDestino(Page<Budget> page, DestinationTypeEnum filtro) {
+		
+		List<Budget> resultado = new LinkedList<Budget>();
+		List<Budget> dados = page.getContent();
+		
+		for (Budget budget : dados) {
+
+			List<Destination> destinations = budget.getDestinations();
+			List<Destination> filteredListDest = destinations.stream()
+					.filter(d -> d.getDestinationType().equals(filtro))
+					.collect(Collectors.toList());
+
+			if(Objects.nonNull(filteredListDest)
+					&& !filteredListDest.isEmpty()) {
+				resultado.add(budget);
+			}
+		}
+		
+		return new PageImpl<>(resultado, PageRequest.of(page.getNumber(),
+				page.getSize(), page.getSort()), dados.size());
 	}
 
 }

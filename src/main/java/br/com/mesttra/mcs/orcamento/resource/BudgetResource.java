@@ -144,15 +144,15 @@ public class BudgetResource {
 			@RequestParam("destination") Optional<String> destination) throws ApplicationException {
 
 		List<Destination> destinations = null;
-		DestinationTypeEnum tipoDestino = DestinationTypeEnum.getEnum(destination.orElse(null));
+		String destinationFilter = destination.orElse(null);
 		
-		if(Objects.nonNull(tipoDestino)) {
+		if(Objects.nonNull(destinationFilter)) {
 			
 			destinations = new LinkedList<Destination>();
 			Destination destino = 
 					Destination
 					.builder()
-					.destinationType(tipoDestino)
+					.destinationType(DestinationTypeEnum.getEnum(destinationFilter))
 					.build();
 			
 			destinations.add(destino);

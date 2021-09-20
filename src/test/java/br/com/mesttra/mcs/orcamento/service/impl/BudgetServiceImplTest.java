@@ -19,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import br.com.mesttra.mcs.orcamento.EntityGenericUtil;
 import br.com.mesttra.mcs.orcamento.entity.Budget;
@@ -55,6 +56,9 @@ public class BudgetServiceImplTest {
 	
 	@Mock
 	private Page<Budget> page;
+	
+	@Mock
+	private Sort sort;
 	
 	private Budget request;
 	
@@ -321,10 +325,18 @@ public class BudgetServiceImplTest {
 	@Test
 	public void listPorDestinationTest() {
 
+		List<Budget> dados = new LinkedList<Budget>();
+		dados.add(response);
+		
 		Budget request = Budget.builder()
 				.destinations(destinations)
 				.build();
-
+		
+		Mockito.when(this.page.getContent()).thenReturn(dados);
+		Mockito.when(this.page.getNumber()).thenReturn(0);
+		Mockito.when(this.page.getSize()).thenReturn(30);
+		Mockito.when(this.page.getSort()).thenReturn(sort);
+		
 		Page<Budget> response = this.service.list(request, pageable);
 
 		assertNotNull(response);
